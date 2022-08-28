@@ -1,3 +1,4 @@
+/*
 package com.yss.springcloud.controller;
 
 import com.yss.springcloud.entities.CommonResult;
@@ -6,15 +7,16 @@ import com.yss.springcloud.service.PaymentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
-
 import javax.annotation.Resource;
 
+*/
 /**
  * @Author: ymx
- * @date: 2022/8/27 0027
+ * @date: 2022/8/27
  * @description:
- */
-@RestController(value = "/payment")
+ *//*
+
+@RestController("/payment")
 @Slf4j
 public class PaymentController {
     @Resource
@@ -43,3 +45,4 @@ public class PaymentController {
         }
     }
 }
+*/
