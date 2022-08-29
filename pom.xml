@@ -11,6 +11,8 @@
 
   <modules>
     <module>cloud-provider-payment8001</module>
+    <module>cloud-consumer-order8090</module>
+    <module>cloud-api-commons</module>
   </modules>
 
   <!-- 统一管理jar包版本 -->
@@ -89,6 +91,7 @@
   </dependencyManagement>
 
   <build>
+    <finalName>SpringCloud学习</finalName>
     <plugins>
       <plugin>
         <groupId>org.springframework.boot</groupId>

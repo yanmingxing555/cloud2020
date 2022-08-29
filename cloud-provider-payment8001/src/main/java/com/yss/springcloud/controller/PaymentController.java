@@ -1,4 +1,3 @@
-/*
 package com.yss.springcloud.controller;
 
 import com.yss.springcloud.entities.CommonResult;
@@ -9,15 +8,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 
-*/
 /**
- * @Author: ymx
- * @date: 2022/8/27
- * @description:
- *//*
-
-@RestController("/payment")
+ * @author: ymx
+ * @date: 2022/8/29
+ * @version: 1.0.0.0
+ */
 @Slf4j
+@RestController
+@RequestMapping("/payment")
 public class PaymentController {
     @Resource
     private PaymentService paymentService;
@@ -37,6 +35,7 @@ public class PaymentController {
     }
     @GetMapping(value = "/get/{id}")
     public CommonResult<Payment> getPaymentById(@PathVariable("id") Long id){
+        log.info("查询请求");
         Payment payment = paymentService.getPaymentById(id);
         if (payment != null){
             return new CommonResult(200,"查询成功！",payment);
@@ -45,4 +44,3 @@ public class PaymentController {
         }
     }
 }
-*/
