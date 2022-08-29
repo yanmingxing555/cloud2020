@@ -12,6 +12,18 @@
   <artifactId>cloud-provider-payment8001</artifactId>
 
   <dependencies>
+    <!--以前老版本，别再使用-->
+    <!--<dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-eureka</artifactId>
+    </dependency>-->
+
+    <!--现在新版本,当前使用-->
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+    </dependency>
+
     <dependency><!-- 引入自己定义的api通用包，可以使用Payment支付Entity -->
       <groupId>com.yss.springcloud</groupId>
       <artifactId>cloud-api-commons</artifactId>
