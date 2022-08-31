@@ -58,4 +58,11 @@ public class PaymentController {
         instances.forEach(instance-> System.out.println("*********CLOUD-PAYMENT-SERVICE实例列表信息********"+instance.getServiceId()+"\t"+instance.getHost()+"\t"+instance.getPort()+"\t"+instance.getUri()));
         return discoveryClient;
     }
+
+    @GetMapping(value = "/lb")
+    public String getPaymentLB()
+    {
+        return serverPort;
+    }
+
 }
