@@ -15,6 +15,10 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class PaymentService {
 
+    public String paymentCircuitBreaker_fallback(Integer id){
+        return "id 不能负数，请稍后再试，/(ㄒoㄒ)/~~   id: " +id;
+    }
+
     /**
      熔断类型：
          1.熔断打开：请求不再进行调用当前服务，内部设置时钟一般为MTTR(平均故障处理时间)，当打开时长达到所设时钟则进入半熔断状态。
@@ -26,8 +30,8 @@ public class PaymentService {
          3.错误百分比阀值：当请求总数在快照时间窗内超过了阀值，比如发生了30次调用，如果在这30次调用中，有15次发生了超时异常，也就是超过50%的错误百分比，在默认设定50%阀值情况下，这时候就会将断路器打开。
      断路器开启或者关闭的条件：
          1.到达以下阀值，断路器将会开启：
-            当满足一定的阀值的时候（默认10秒内超过20个请求次数)
-            当失败率达到一定的时候（默认10秒内超过50%的请求失败)
+          当满足一定的阀值的时候（默认10秒内超过20个请求次数)
+          当失败率达到一定的时候（默认10秒内超过50%的请求失败)
          2.当开启的时候，所有请求都不会进行转发
          3.一段时间之后（默认是5秒)，这个时候断路器是半开状态，会让其中一个请求进行转发。如果成功，断路器会关闭，若失败，继续开启。
      断路器打开之后：
@@ -39,9 +43,9 @@ public class PaymentService {
     //=====服务熔断
     @HystrixCommand(fallbackMethod="paymentCircuitBreaker_fallback",commandProperties = {
             @HystrixProperty(name = "circuitBreaker.enabled",value = "true"),// 是否开启断路器
-            @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold",value = "10"),// 请求次数
-            @HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds",value = "10000"), // 时间窗口期
-            @HystrixProperty(name = "circuitBreaker.errorThresholdPercentage",value = "60"),// 失败率达到多少后跳闸
+            @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold",value = "20"),// 10秒内的请求次数（默认值：10秒内请求20次）：
+            @HystrixProperty(name = "circuitBreaker.errorThresholdPercentage",value = "50"),// 失败率达到多少后跳闸（默认值：50%）
+            @HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds",value = "10000"), //时间窗口期，熔断之后sleep时间（默认值：5秒）
     })
     public String paymentCircuitBreaker(Integer id){
         if (id < 0){
@@ -49,10 +53,6 @@ public class PaymentService {
         }
         String simpleUUID = IdUtil.simpleUUID();
         return Thread.currentThread().getName()+"\t"+"调用成功，流水号："+simpleUUID;
-    }
-
-    public String paymentCircuitBreaker_fallback(Integer id){
-        return "id 不能负数，请稍后再试，/(ㄒoㄒ)/~~   id: " +id;
     }
     //=======All配置=======
 
