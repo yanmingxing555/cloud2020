@@ -1,5 +1,5 @@
 server:
-  port: 8802
+  port: 8803
 
 spring:
   application:
@@ -23,7 +23,6 @@ spring:
           #微服务应用放置于同一个group中，就能够保证消息只会被其中一个应用消费一次。
           #不同的组是可以重复消费的，同一个组内会发生竞争关系，只有其中一个可以消费
           group: A_Group #<-------关键：原理
-
 eureka:
   client: # 客户端进行Eureka注册的配置
     service-url:
@@ -31,7 +30,7 @@ eureka:
   instance:
     lease-renewal-interval-in-seconds: 2 # 设置心跳的时间间隔（默认是30秒）
     lease-expiration-duration-in-seconds: 5 # 如果现在超过了5秒的间隔（默认是90秒）
-    instance-id: receive-8802.com  # 在信息列表时显示主机名称
+    instance-id: receive-8803.com  # 在信息列表时显示主机名称
     prefer-ip-address: true     # 访问的路径变为IP地址
 
 
