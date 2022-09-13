@@ -68,4 +68,43 @@ public class MainApp8401 {
      异常数(分钟级)
         异常数(分钟统计）超过阈值时，触发降级;时间窗口结束后，关闭降级
      */
+    /**
+     关注点，添加Nacos数据源配置：持久化限流熔断规则
+        1.引入依赖
+         <!--SpringCloud ailibaba sentinel-datasource-nacos 后续做持久化用到-->
+         <dependency>
+             <groupId>com.alibaba.csp</groupId>
+             <artifactId>sentinel-datasource-nacos</artifactId>
+         </dependency>
+        2.yml配置：
+     sentinel:
+             datasource: #<---------------------------关注点，添加Nacos数据源配置：持久化限流熔断规则
+                 ds1:
+                     nacos:
+                         server-addr: localhost:8848
+                         dataId: cloudalibaba-sentinel-service
+                         groupId: DEFAULT_GROUP
+                         data-type: json
+                         rule-type: flow
+        3.nacos增加配置：名称：cloudalibaba-sentinel-service（服务名称），格式为json
+             [
+             {
+             "resource": "/rateLimit/byUrl",
+             "limitApp": "default",
+             "grade": 1,
+             "count": 1,
+             "strategy": 0,
+             "controlBehavior": 0,
+             "clusterMode": false
+             }
+             ]
+        各参数说明：
+             resource：资源名称；
+             limitApp：来源应用；
+             grade：阈值类型，0表示线程数，1表示QPS；
+             count：单机阈值；
+             strategy：流控模式，0表示直接，1表示关联，2表示链路；
+             controlBehavior：流控效果，0表示快速失败，1表示Warm Up，2表示排队等待；
+             clusterMode：是否集群。
+     */
 }
