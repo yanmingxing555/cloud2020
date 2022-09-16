@@ -1,8 +1,8 @@
 # springcloud 学习
 版本：
-<!--spring boot 2.2.2-->
-<!--spring cloud Hoxton.SR1-->
-<!--spring cloud alibaba 2.1.0.RELEASE-->
+spring boot 2.2.2
+spring cloud Hoxton.SR1
+spring cloud alibaba 2.1.0.RELEASE
 
       <!--spring boot 2.2.2-->
       <dependency>
